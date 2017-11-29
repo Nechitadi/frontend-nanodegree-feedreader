@@ -31,29 +31,53 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-
+        it('have a non-empty Url defined', function() {
+            for (var key in allFeeds) {
+                expect(allFeeds[key].url).toBeDefined();
+                expect(allFeeds[key].url.length).not.toBe(0);
+            }
+        });
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+        it('have a non-empty name defined', function() {
+            for(var key in allFeeds) {
+                expect(allFeeds[key].name).toBeDefined();
+                expect(allFeeds[key].url.length).not.toBe(0);
+            }
+        });
     });
 
-
+    
     /* TODO: Write a new test suite named "The menu" */
+    describe('The menu', function() {
 
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
-
+        let slideMenu = document.getElementsByClassName('slide-menu')[0];
+        let style = getComputedStyle(slideMenu);
+        it('has the menu element hidden by default', function() {
+            expect(style.transform).toBe('matrix(1, 0, 0, 1, -192, 0)');
+        });
          /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
-
+        it('changes visibility when the menu icon is clicked', function() {
+            let menuIconLink = document.getElementsByClassName('menu-icon-link')[0];
+            let body = document.getElementsByTagName('body')[0];
+            menuIconLink.click();
+            expect(body.className).toBe('');
+            menuIconLink.click();
+            expect(body.className).toBe('menu-hidden');
+        });
+    });
     /* TODO: Write a new test suite named "Initial Entries" */
 
         /* TODO: Write a test that ensures when the loadFeed
