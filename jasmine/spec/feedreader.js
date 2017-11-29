@@ -92,18 +92,34 @@ $(function() {
         });
 
         it('should be at least a single .entry element within the .feed container after loadFeed completes it\'s work', function(done) {
-            // let feedContainer = document.getElementsByClassName('feed');
-            // let entry = document.querySelector('.entry');
             expect($('.feed').children().length).toBeGreaterThan(0);
-            //expect($('.feed').firstChild.hasClass('entry')).toBeTruthy();
+            expect($('.entry').length).toBeGreaterThan(0);
             done();
         });
     });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
-    
+    describe('New Feed Section', function() {
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        var legacyFeed;
+        var newFeed;
+
+        beforeEach(function(done) {
+            $('.feed').empty();
+            loadFeed(0, function(){
+                legacyFeed = $('.feed').html();
+                // As per reviewer, running done within loadFeed(0) solves race condition
+                loadFeed(1, done);
+            });
+        });
+
+        it('should actually changes when loadFeed() is run', function() {
+            newFeed = $('.feed').html();
+            expect(legacyFeed).not.toBe(newFeed);
+        });
+
+    });
 }());
