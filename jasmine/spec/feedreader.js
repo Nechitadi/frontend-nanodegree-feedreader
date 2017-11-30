@@ -92,8 +92,7 @@ $(function() {
         });
 
         it('should be at least a single .entry element within the .feed container after loadFeed completes it\'s work', function() {
-            expect($('.feed').children().length).toBeGreaterThan(0);
-            expect($('.entry').length).toBeGreaterThan(0);
+            expect($('.feed article').hasClass('entry')).toBe(true);
         });
     });
 
