@@ -62,7 +62,7 @@ $(function() {
         let slideMenu = document.getElementsByClassName('slide-menu')[0];
         let style = getComputedStyle(slideMenu);
         it('has the menu element hidden by default', function() {
-            expect(style.transform).toBe('matrix(1, 0, 0, 1, -192, 0)');
+            expect($('body').hasClass('menu-hidden')).toBe(true);
         });
          /* Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
@@ -91,10 +91,9 @@ $(function() {
             loadFeed(0, done);
         });
 
-        it('should be at least a single .entry element within the .feed container after loadFeed completes it\'s work', function(done) {
+        it('should be at least a single .entry element within the .feed container after loadFeed completes it\'s work', function() {
             expect($('.feed').children().length).toBeGreaterThan(0);
             expect($('.entry').length).toBeGreaterThan(0);
-            done();
         });
     });
 
