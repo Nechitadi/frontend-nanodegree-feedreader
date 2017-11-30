@@ -45,7 +45,7 @@ $(function() {
         it('have a non-empty name defined', function() {
             for(var key in allFeeds) {
                 expect(allFeeds[key].name).toBeDefined();
-                expect(allFeeds[key].url.length).not.toBe(0);
+                expect(allFeeds[key].name.length).not.toBe(0);
             }
         });
     });
@@ -71,11 +71,10 @@ $(function() {
           */
         it('changes visibility when the menu icon is clicked', function() {
             let menuIconLink = document.getElementsByClassName('menu-icon-link')[0];
-            let body = document.getElementsByTagName('body')[0];
             menuIconLink.click();
-            expect(body.className).not.toBe('menu-hidden');
+            expect($('body').hasClass('menu-hidden')).toBe(false);
             menuIconLink.click();
-            expect(body.className).toBe('menu-hidden');
+            expect($('body').hasClass('menu-hidden')).toBe(true);
         });
     });
 
@@ -92,7 +91,7 @@ $(function() {
         });
 
         it('should be at least a single .entry element within the .feed container after loadFeed completes it\'s work', function() {
-            expect($('.feed article').hasClass('entry')).toBe(true);
+            expect($('.feed .entry').length).toBeGreaterThan(0);
         });
     });
 
